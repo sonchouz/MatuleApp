@@ -3,24 +3,24 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
-    android:layout_width="160dp"
-    android:layout_height="182dp"
+    android:layout_width="128dp"
+    android:layout_height="144dp"
     tools:context=".MainPageActivity">
 
     <ImageButton
         android:id="@+id/imageButton4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="22dp"
+        android:layout_height="28dp"
         android:backgroundTint="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@drawable/frame_1000000821"
-        tools:ignore="MissingConstraints,SpeakableTextPresentCheck"
-        tools:layout_editor_absoluteX="116dp"
-        tools:layout_editor_absoluteY="141dp" />
+        tools:ignore="MissingConstraints,SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
     <ImageButton
         android:id="@+id/imageButton10"
-        android:layout_width="46dp"
-        android:layout_height="40dp"
+        android:layout_width="33dp"
+        android:layout_height="36dp"
         app:srcCompat="@drawable/heart"
         tools:ignore="MissingConstraints,SpeakableTextPresentCheck,TouchTargetSizeCheck"
         tools:layout_editor_absoluteX="2dp"
@@ -28,8 +28,9 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="98dp"
-        android:layout_height="116dp"
+        android:layout_width="67dp"
+        android:layout_height="81dp"
+        android:layout_marginTop="2dp"
         android:layout_marginEnd="28dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -47,27 +48,29 @@
         android:textSize="10sp"
         app:layout_constraintStart_toStartOf="parent"
         tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteY="122dp" />
+        tools:layout_editor_absoluteY="84dp" />
 
     <TextView
         android:id="@+id/textView12"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
+        android:layout_marginTop="5dp"
         android:text="Nike Air Max"
         android:textSize="12sp"
         app:layout_constraintStart_toStartOf="parent"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteY="141dp" />
+        app:layout_constraintTop_toBottomOf="@+id/textView11"
+        tools:ignore="MissingConstraints" />
 
     <TextView
         android:id="@+id/textView13"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="37dp"
+        android:layout_height="16dp"
         android:layout_marginStart="16dp"
+        android:layout_marginTop="2dp"
         android:text="P 752.00"
         android:textSize="8sp"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="166dp"
+        app:layout_constraintTop_toBottomOf="@+id/textView12"
         tools:ignore="MissingConstraints" />
 </androidx.constraintlayout.widget.ConstraintLayout>
