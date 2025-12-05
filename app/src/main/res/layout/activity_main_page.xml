@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF"
-    android:backgroundTint="#FFFFFF">
+    android:background="#F7F7F9"
+    android:backgroundTint="#F7F7F9">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/main"
@@ -15,8 +15,8 @@
         app:layout_constraintHorizontal_bias="0.108"
         app:layout_constraintStart_toStartOf="parent"
         tools:context=".MainPageActivity"
-        tools:layout_editor_absoluteY="372dp"
-        tools:ignore="DuplicateIds,MissingConstraints">
+        tools:ignore="DuplicateIds,MissingConstraints"
+        tools:layout_editor_absoluteY="372dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/main"
@@ -374,12 +374,21 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.736" />
 
+    <ImageView
+        android:id="@+id/imageView8"
+        android:layout_width="440dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/vector_1789"
+        tools:layout_editor_absoluteY="611dp" />
+
     <ImageButton
         android:id="@+id/imageButton5"
         android:layout_width="97dp"
         android:layout_height="80dp"
-        android:layout_marginTop="648dp"
-        android:backgroundTint="#FFFFFF"
+        android:layout_marginTop="600dp"
+        android:backgroundTint="#F7F7F9"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -394,7 +403,7 @@
         android:backgroundTint="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.06"
+        app:layout_constraintHorizontal_bias="0.043"
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/home_2"
         tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
@@ -417,11 +426,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="28dp"
-        android:layout_marginEnd="80dp"
         android:layout_marginBottom="24dp"
         android:backgroundTint="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.037"
         app:layout_constraintStart_toEndOf="@+id/imageButton5"
         app:srcCompat="@drawable/notif"
         tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
