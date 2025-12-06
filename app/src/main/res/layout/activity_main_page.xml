@@ -18,86 +18,6 @@
         tools:ignore="DuplicateIds,MissingConstraints"
         tools:layout_editor_absoluteY="372dp">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/main"
-            android:layout_width="126dp"
-            android:layout_height="134dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.108"
-            app:layout_constraintStart_toStartOf="parent"
-            tools:context=".MainPageActivity"
-            tools:layout_editor_absoluteY="372dp">
-
-            <ImageButton
-                android:id="@+id/imageButton4"
-                android:layout_width="22dp"
-                android:layout_height="28dp"
-                android:layout_marginEnd="4dp"
-                android:layout_marginBottom="4dp"
-                android:backgroundTint="#FFFFFF"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:srcCompat="@drawable/frame_1000000821"
-                tools:ignore="MissingConstraints,SpeakableTextPresentCheck" />
-
-            <ImageButton
-                android:id="@+id/imageButton10"
-                android:layout_width="33dp"
-                android:layout_height="36dp"
-                app:srcCompat="@drawable/heart"
-                tools:ignore="MissingConstraints,SpeakableTextPresentCheck,TouchTargetSizeCheck"
-                tools:layout_editor_absoluteX="2dp"
-                tools:layout_editor_absoluteY="2dp" />
-
-            <ImageView
-                android:id="@+id/imageView"
-                android:layout_width="67dp"
-                android:layout_height="81dp"
-                android:layout_marginTop="2dp"
-                android:layout_marginEnd="28dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.242"
-                app:srcCompat="@drawable/image_2" />
-
-            <TextView
-                android:id="@+id/textView11"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:text="BEST SELLER"
-                android:textColor="#48B2E7"
-                android:textSize="10sp"
-                app:layout_constraintStart_toStartOf="parent"
-                tools:ignore="MissingConstraints"
-                tools:layout_editor_absoluteY="84dp" />
-
-            <TextView
-                android:id="@+id/textView12"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="5dp"
-                android:text="Nike Air Max"
-                android:textSize="12sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView11"
-                tools:ignore="MissingConstraints" />
-
-            <TextView
-                android:id="@+id/textView13"
-                android:layout_width="37dp"
-                android:layout_height="16dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="2dp"
-                android:text="P 752.00"
-                android:textSize="8sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView12"
-                tools:ignore="MissingConstraints" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
         <ImageButton
             android:id="@+id/imageButton4"
             android:layout_width="22dp"
@@ -259,16 +179,6 @@
         app:shapeAppearance="@style/Theme.MatuleApp"
         app:shapeAppearanceOverlay="@style/Widget.Theme.MatuleApp.ButtonBar.Fullscreen" />
 
-    <ImageView
-        android:id="@+id/imageView5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="132dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/icon" />
-
     <TextView
         android:id="@+id/textView6"
         android:layout_width="wrap_content"
@@ -285,7 +195,7 @@
         android:id="@+id/textView7"
         android:layout_width="27dp"
         android:layout_height="26dp"
-        android:layout_marginBottom="168dp"
+        android:layout_marginBottom="184dp"
         android:text="Все"
         android:textColor="#48B2E7"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -387,7 +297,7 @@
         android:id="@+id/imageButton5"
         android:layout_width="97dp"
         android:layout_height="80dp"
-        android:layout_marginTop="600dp"
+        android:layout_marginTop="624dp"
         android:backgroundTint="#F7F7F9"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -455,10 +365,10 @@
         android:layout_marginBottom="22dp"
         app:layout_constraintBottom_toTopOf="@+id/imageButton5"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.44"
+        app:layout_constraintHorizontal_bias="0.375"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView7"
-        app:layout_constraintVertical_bias="1.0"
+        app:layout_constraintVertical_bias="0.656"
         app:srcCompat="@drawable/frame_1000000849"
         tools:ignore="SpeakableTextPresentCheck" />
 
