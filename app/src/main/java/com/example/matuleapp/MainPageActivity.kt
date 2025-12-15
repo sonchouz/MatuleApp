@@ -3,6 +3,7 @@ package com.example.matuleapp
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -19,8 +20,12 @@ class MainPageActivity : AppCompatActivity() {
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
-        }
-        val btnnext = R.id.outdoor_btn
 
+        }
+        val btnoutdoor = findViewById<Button>(R.id.outdoor_btn)
+        btnoutdoor.setOnClickListener {
+            val intent = Intent(this, Catalog::class.java)
+            startActivity(intent)
+        }
     }
 }
