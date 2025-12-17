@@ -11,7 +11,7 @@ class Fragment3: Fragment(R.layout.fragment_3) {
 
         val btnnext = view.findViewById<Button>(R.id.btn_next2)
         btnnext.setOnClickListener {
-            val intent = Intent(requireContext(), MainPageActivity::class.java)
+            val intent = Intent(requireContext(), LoginActivity::class.java)
             startActivity(intent)
             requireActivity().finish()
         }
