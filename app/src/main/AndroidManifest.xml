@@ -12,12 +12,14 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MatuleApp">
         <activity
+            android:name=".DetailsActivity"
+            android:exported="false" />
+        <activity
             android:name=".SavedActivity"
             android:exported="false" />
         <activity
             android:name=".LoginActivity"
             android:exported="false" />
-
         <activity
             android:name=".PopularActivity"
             android:exported="false"
