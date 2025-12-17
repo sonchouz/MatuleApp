@@ -34,6 +34,10 @@ class LoginActivity : AppCompatActivity() {
     private fun validEmail(): String?
     {
         val emailtext = binding.emailtxt.text.toString().trim()
+        if(emailtext.length == 0)
+        {
+            return "Email не может быть пустым"
+        }
         if(!Patterns.EMAIL_ADDRESS.matcher(emailtext).matches())
         {
             return "Некорректный email"
@@ -50,7 +54,11 @@ class LoginActivity : AppCompatActivity() {
     }
     private fun validPswd(): String?
     {
-        val pswdtext = binding.pswdtxt.text.toString()
+        val pswdtext = binding.pswdtxt.text.toString().trim()
+        if(pswdtext.length == 0)
+        {
+            return "Пароль не может быть пустым"
+        }
         if (pswdtext.length < 8){
             return "Пароль должен быть не менее 8 символов"
         }
