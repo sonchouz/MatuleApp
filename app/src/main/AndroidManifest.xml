@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MatuleApp">
         <activity
+            android:name=".LoginActivity"
+            android:exported="false" />
+        <activity
             android:name=".PopularActivity"
             android:exported="true">
             <intent-filter>
