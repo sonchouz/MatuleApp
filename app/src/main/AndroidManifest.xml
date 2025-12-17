@@ -14,9 +14,7 @@
         <activity
             android:name=".SavedActivity"
             android:exported="false" />
-        <activity
-            android:name=".LoginActivity"
-            android:exported="false" />
+        
 
         <activity
             android:name=".PopularActivity"
