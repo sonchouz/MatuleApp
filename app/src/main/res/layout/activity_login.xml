@@ -138,6 +138,7 @@
         android:layout_height="92dp"
         android:layout_marginTop="49dp"
         android:layout_marginEnd="30dp"
+        app:passwordToggleEnabled="true"
         app:helperText="Пароль должен быть не менее 8 символов"
         app:helperTextTextColor="#FF0000"
         app:layout_constraintEnd_toEndOf="parent"
