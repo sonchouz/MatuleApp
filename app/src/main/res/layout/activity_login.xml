@@ -111,7 +111,7 @@
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/email"
         android:layout_width="325dp"
-        android:layout_height="76dp"
+        android:layout_height="85dp"
         android:layout_marginTop="41dp"
         android:backgroundTint="#F7F7F9"
         android:hint="xyz@gmail.com"
