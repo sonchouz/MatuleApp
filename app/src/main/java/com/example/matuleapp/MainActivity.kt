@@ -24,6 +24,6 @@ class MainActivity : AppCompatActivity() {
         val intent = Intent(this, OnBoarding::class.java)
 
         startActivity(intent)
-        finish()}, 3000)
+        }, 3000)
     }
 }

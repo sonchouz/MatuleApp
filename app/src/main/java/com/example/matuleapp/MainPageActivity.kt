@@ -28,11 +28,13 @@ class MainPageActivity : AppCompatActivity() {
         btnoutdoor.setOnClickListener {
             val intent = Intent(this, Catalog::class.java)
             startActivity(intent)
+
         }
         val btnsaved = findViewById<ImageButton>(R.id.btnsaved)
         btnsaved.setOnClickListener {
             val intent = Intent(this, SavedActivity::class.java)
             startActivity(intent)
+
         }
     }
 }
