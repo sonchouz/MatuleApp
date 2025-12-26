@@ -22,10 +22,6 @@ class MainPageActivity : AppCompatActivity() {
             insets
 
         }
-        val btnoutdoor = findViewById<Button>(R.id.outdoor_btn)
-        btnoutdoor.setOnClickListener {
-            val intent = Intent(this, Catalog::class.java)
-            startActivity(intent)
-        }
+
     }
 }
