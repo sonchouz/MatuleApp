@@ -12,6 +12,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MatuleApp">
         <activity
+            android:name=".SearchActivity"
+            android:exported="false" />
+        <activity
+            android:name=".FragmentDetails"
+            android:exported="false" />
+        <activity
             android:name=".DetailsActivity"
             android:exported="false" />
         <activity
