@@ -1,37 +1,48 @@
 package com.example.matuleapp
+
+import android.content.Intent
 import android.os.Bundle
 import android.util.Patterns
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import com.example.matuleapp.databinding.ActivityLoginBinding
-import com.example.matuleapp.Presentation.login.LoginViewModel
 import androidx.lifecycle.lifecycleScope
-import android.widget.Toast
+import com.example.matuleapp.Data.SupabaseProvider
+import com.example.matuleapp.databinding.ActivityLoginBinding
 import io.github.jan.supabase.postgrest.postgrest
 import kotlinx.coroutines.launch
 import kotlinx.serialization.Serializable
-import android.content.Intent
+
 @Serializable
-private data class UserEmailRow(
-    val email: String
+data class UserRow(
+    val id: Long? = null,
+    val email: String,
+    val password: String
 )
 
 class LoginActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityLoginBinding
-    private lateinit var vm: LoginViewModel
-    override fun onCreate(savedInstanceState: Bundle?) {
 
+    private lateinit var binding: ActivityLoginBinding
+
+    override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         enableEdgeToEdge()
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
+
+        // безопаснее, чем findViewById(R.id.main) (id может не существовать)
+        ViewCompat.setOnApplyWindowInsetsListener(binding.root) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
+        emailFocusListener()
+        pswdFocusListener()
+
         binding.loginbtn.setOnClickListener {
             val emailError = validEmail()
             val pswdError = validPswd()
@@ -42,86 +53,74 @@ class LoginActivity : AppCompatActivity() {
             if (emailError != null || pswdError != null) return@setOnClickListener
 
             val email = binding.emailtxt.text.toString().trim()
+            val pswd = binding.pswdtxt.text.toString()
 
             lifecycleScope.launch {
-                val exists = userExistsByEmail(email)
-                if (!exists) {
+                val ok = userExists(email, pswd)
+                if (!ok) {
                     Toast.makeText(
                         this@LoginActivity,
-                        "Пользователь не найден. Зарегистрируйтесь.",
+                        "Неверный email или пароль",
                         Toast.LENGTH_SHORT
                     ).show()
                     return@launch
                 }
 
-                // Тут уже делай логин (через Supabase Auth или свою логику
-                val intent = Intent(this@LoginActivity, MainPageActivity::class.java)
-                startActivity(intent)
-                finish() // чтобы нельзя было вернуться назад кнопкой Back
 
-            }
-        }
-
-        emailFocusListener()
-        pswdFocusListener()
-    }
-    private fun emailFocusListener(){
-        binding.emailtxt.setOnFocusChangeListener{_, focused ->
-            if (!focused)
-            {
-                binding.email.helperText = validEmail()
+                startActivity(Intent(this@LoginActivity, MainPageActivity::class.java))
+                finish()
             }
         }
     }
-    private fun validEmail(): String?
-    {
-        val emailtext = binding.emailtxt.text.toString().trim()
-        if(emailtext.length == 0)
-        {
-            return "Email не может быть пустым"
+
+    private fun emailFocusListener() {
+        binding.emailtxt.setOnFocusChangeListener { _, focused ->
+            if (!focused) binding.email.helperText = validEmail()
         }
-        if(!Patterns.EMAIL_ADDRESS.matcher(emailtext).matches())
-        {
-            return "Некорректный email"
+    }
+
+    private fun pswdFocusListener() {
+        binding.pswdtxt.setOnFocusChangeListener { _, focused ->
+            if (!focused) binding.pswd.helperText = validPswd()
         }
+    }
+
+    private fun validEmail(): String? {
+        val emailText = binding.emailtxt.text.toString().trim()
+        if (emailText.isEmpty()) return "Email не может быть пустым"
+        if (!Patterns.EMAIL_ADDRESS.matcher(emailText).matches()) return "Некорректный email"
         return null
     }
-    private fun pswdFocusListener(){
-        binding.pswdtxt.setOnFocusChangeListener{_, focused ->
-            if (!focused)
-            {
-                binding.pswd.helperText = validPswd()
-            }
-        }
-    }
+
     private fun validPswd(): String? {
-        val pswdtext = binding.pswdtxt.text.toString() // без trim
-
-        if (pswdtext.isEmpty()) return "Пароль не может быть пустым"
-        if (pswdtext.length < 8) return "Пароль должен быть не менее 8 символов"
-        if (!pswdtext.any { it.isUpperCase() }) return "Пароль должен содержать хотя бы 1 заглавную букву"
-        if (!pswdtext.any { it.isLowerCase() }) return "Пароль должен содержать хотя бы 1 строчную букву"
-        if (!pswdtext.any { !it.isLetterOrDigit() }) return "Пароль должен содержать хотя бы 1 спецсимвол"
-
+        val pswdText = binding.pswdtxt.text.toString() // без trim
+        if (pswdText.isEmpty()) return "Пароль не может быть пустым"
+        if (pswdText.length < 8) return "Пароль должен быть не менее 8 символов"
+        if (!pswdText.any { it.isUpperCase() }) return "Пароль должен содержать хотя бы 1 заглавную букву"
+        if (!pswdText.any { it.isLowerCase() }) return "Пароль должен содержать хотя бы 1 строчную букву"
+        if (!pswdText.any { !it.isLetterOrDigit() }) return "Пароль должен содержать хотя бы 1 спецсимвол"
         return null
     }
 
-    private suspend fun userExistsByEmail(email: String): Boolean {
+    private suspend fun userExists(email: String, password: String): Boolean {
         return try {
-            val rows = com.example.matuleapp.Data.SupabaseProvider.supabase
+            val e = email.trim().lowercase()
+
+            val rows = SupabaseProvider.supabase
                 .postgrest["Users"]
                 .select {
-                    filter { eq("email", email) }
+                    filter {
+                        eq("email", e)
+                        eq("password", password)
+                    }
                     limit(1)
                 }
-                .decodeList<UserEmailRow>()
+                .decodeList<UserRow>()
 
             rows.isNotEmpty()
         } catch (e: Exception) {
+            e.printStackTrace()
             false
         }
     }
-
-
-
 }

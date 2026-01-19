@@ -1,0 +1,47 @@
+Index: app/src/main/java/com/example/matuleapp/LoginActivity.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.matuleapp\r\nimport android.os.Bundle\r\nimport android.util.Patterns\r\nimport androidx.activity.enableEdgeToEdge\r\nimport androidx.appcompat.app.AppCompatActivity\r\nimport androidx.core.view.ViewCompat\r\nimport androidx.core.view.WindowInsetsCompat\r\nimport com.example.matuleapp.databinding.ActivityLoginBinding\r\nimport com.example.matuleapp.Presentation.login.LoginViewModel\r\nimport androidx.lifecycle.lifecycleScope\r\nimport android.widget.Toast\r\nimport io.github.jan.supabase.postgrest.postgrest\r\nimport kotlinx.coroutines.launch\r\nimport kotlinx.serialization.Serializable\r\nimport android.content.Intent\r\n@Serializable\r\nprivate data class UserEmailRow(\r\n    val email: String\r\n)\r\n\r\nclass LoginActivity : AppCompatActivity() {\r\n    private lateinit var binding: ActivityLoginBinding\r\n    private lateinit var vm: LoginViewModel\r\n    override fun onCreate(savedInstanceState: Bundle?) {\r\n\r\n        super.onCreate(savedInstanceState)\r\n        enableEdgeToEdge()\r\n        binding = ActivityLoginBinding.inflate(layoutInflater)\r\n        setContentView(binding.root)\r\n        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->\r\n            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())\r\n            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)\r\n            insets\r\n        }\r\n        binding.loginbtn.setOnClickListener {\r\n            val emailError = validEmail()\r\n            val pswdError = validPswd()\r\n\r\n            binding.email.helperText = emailError\r\n            binding.pswd.helperText = pswdError\r\n\r\n            if (emailError != null || pswdError != null) return@setOnClickListener\r\n\r\n            val email = binding.emailtxt.text.toString().trim()\r\n\r\n            lifecycleScope.launch {\r\n                val exists = userExistsByEmail(email)\r\n                if (!exists) {\r\n                    Toast.makeText(\r\n                        this@LoginActivity,\r\n                        \"Пользователь не найден. Зарегистрируйтесь.\",\r\n                        Toast.LENGTH_SHORT\r\n                    ).show()\r\n                    return@launch\r\n                }\r\n\r\n                // Тут уже делай логин (через Supabase Auth или свою логику\r\n                val intent = Intent(this@LoginActivity, MainPageActivity::class.java)\r\n                startActivity(intent)\r\n                finish() // чтобы нельзя было вернуться назад кнопкой Back\r\n\r\n            }\r\n        }\r\n\r\n        emailFocusListener()\r\n        pswdFocusListener()\r\n    }\r\n    private fun emailFocusListener(){\r\n        binding.emailtxt.setOnFocusChangeListener{_, focused ->\r\n            if (!focused)\r\n            {\r\n                binding.email.helperText = validEmail()\r\n            }\r\n        }\r\n    }\r\n    private fun validEmail(): String?\r\n    {\r\n        val emailtext = binding.emailtxt.text.toString().trim()\r\n        if(emailtext.length == 0)\r\n        {\r\n            return \"Email не может быть пустым\"\r\n        }\r\n        if(!Patterns.EMAIL_ADDRESS.matcher(emailtext).matches())\r\n        {\r\n            return \"Некорректный email\"\r\n        }\r\n        return null\r\n    }\r\n    private fun pswdFocusListener(){\r\n        binding.pswdtxt.setOnFocusChangeListener{_, focused ->\r\n            if (!focused)\r\n            {\r\n                binding.pswd.helperText = validPswd()\r\n            }\r\n        }\r\n    }\r\n    private fun validPswd(): String? {\r\n        val pswdtext = binding.pswdtxt.text.toString() // без trim\r\n\r\n        if (pswdtext.isEmpty()) return \"Пароль не может быть пустым\"\r\n        if (pswdtext.length < 8) return \"Пароль должен быть не менее 8 символов\"\r\n        if (!pswdtext.any { it.isUpperCase() }) return \"Пароль должен содержать хотя бы 1 заглавную букву\"\r\n        if (!pswdtext.any { it.isLowerCase() }) return \"Пароль должен содержать хотя бы 1 строчную букву\"\r\n        if (!pswdtext.any { !it.isLetterOrDigit() }) return \"Пароль должен содержать хотя бы 1 спецсимвол\"\r\n\r\n        return null\r\n    }\r\n\r\n    private suspend fun userExistsByEmail(email: String): Boolean {\r\n        return try {\r\n            val rows = com.example.matuleapp.Data.SupabaseProvider.supabase\r\n                .postgrest[\"Users\"]\r\n                .select {\r\n                    filter { eq(\"email\", email) }\r\n                    limit(1)\r\n                }\r\n                .decodeList<UserEmailRow>()\r\n\r\n            rows.isNotEmpty()\r\n        } catch (e: Exception) {\r\n            false\r\n        }\r\n    }\r\n\r\n\r\n\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/matuleapp/LoginActivity.kt b/app/src/main/java/com/example/matuleapp/LoginActivity.kt
+--- a/app/src/main/java/com/example/matuleapp/LoginActivity.kt	(revision 6b93b34b9d8a49a9c1cb06853a4993dcdcbbe184)
++++ b/app/src/main/java/com/example/matuleapp/LoginActivity.kt	(date 1767077599240)
+@@ -13,6 +13,9 @@
+ import kotlinx.coroutines.launch
+ import kotlinx.serialization.Serializable
+ import android.content.Intent
++import android.util.Log
++import com.example.matuleapp.Data.SupabaseProvider
++
+ @Serializable
+ private data class UserEmailRow(
+     val email: String
+@@ -108,20 +111,19 @@
+ 
+     private suspend fun userExistsByEmail(email: String): Boolean {
+         return try {
+-            val rows = com.example.matuleapp.Data.SupabaseProvider.supabase
+-                .postgrest["Users"]
++            val rows = SupabaseProvider.supabase
++                .postgrest["Users"] // проверь имя
+                 .select {
+-                    filter { eq("email", email) }
++                    filter { eq("email", email.lowercase()) }
+                     limit(1)
+                 }
+                 .decodeList<UserEmailRow>()
+ 
+             rows.isNotEmpty()
+         } catch (e: Exception) {
+-            false
++            Log.e("Login", "userExistsByEmail failed", e)
++            throw e // временно, чтобы увидеть проблему сразу
+         }
+     }
+ 
+-
+-
+ }
+\ No newline at end of file

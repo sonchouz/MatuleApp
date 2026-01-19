@@ -2,6 +2,9 @@ package com.example.matuleapp.Data
 import io.github.jan.supabase.postgrest.Postgrest
 import io.github.jan.supabase.auth.Auth
 import io.github.jan.supabase.createSupabaseClient
+import io.github.jan.supabase.storage.Storage
+import io.ktor.client.engine.okhttp.OkHttp
+
 object SupabaseProvider {
     val supabase = createSupabaseClient(
         supabaseUrl = "https://ryibhjqukaxxzygyuhqw.supabase.co",
@@ -9,6 +12,7 @@ object SupabaseProvider {
     ) {
         install(Postgrest)
         install(Auth)
-
+        install(Storage)
+        httpEngine = OkHttp.create()
     }
 }

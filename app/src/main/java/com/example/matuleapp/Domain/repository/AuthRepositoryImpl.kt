@@ -15,16 +15,24 @@ class AuthRepositoryImpl : AuthRepository {
     override fun isSignedIn(): Boolean =
         supabase.auth.currentUserOrNull() != null
 
-    override suspend fun userExistsByEmail(email: String): Boolean {
-        TODO("Not yet implemented")
-    }
+
 
     override suspend fun signIn(email: String, pswd: String) {
-        supabase.auth.signInWith(Email) {
-            this.email = email
-            this.password = pswd
-        }
+        val normalizedEmail = email.trim()
+
+        val users = supabase.postgrest["Users"]
+            .select {
+                filter {
+                    eq("email", normalizedEmail)
+                    eq("password", pswd)
+                }
+                limit(1)
+            }
+            .decodeList<UserProfileDto>()
+
+        if (users.isEmpty()) error("Пользователь не найден или пароль неверный")
     }
+
 
     override suspend fun signUp(email: String, password: String) {
         supabase.auth.signUpWith(Email) {
