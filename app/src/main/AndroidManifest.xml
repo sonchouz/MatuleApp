@@ -13,10 +13,15 @@
         android:theme="@style/Theme.MatuleApp">
         <activity
             android:name=".SearchActivity"
-            android:exported="false" />
-        <activity
-            android:name=".FragmentDetails"
-            android:exported="false" />
+            android:exported="false" >
+        </activity>
+       <activity android:name=".Catalog"
+           android:exported="true">
+           <intent-filter>
+               <action android:name="android.intent.action.MAIN" />
+               <category android:name="android.intent.category.LAUNCHER" />
+           </intent-filter>
+       </activity>
         <activity
             android:name=".DetailsActivity"
             android:exported="false" />

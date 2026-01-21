@@ -18,7 +18,7 @@
         tools:ignore="MissingConstraints,SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
     <ImageButton
-        android:id="@+id/imageButton10"
+        android:id="@+id/ibSaved"
         android:layout_width="33dp"
         android:layout_height="36dp"
         app:srcCompat="@drawable/heart"
