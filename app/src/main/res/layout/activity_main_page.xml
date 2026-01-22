@@ -26,8 +26,6 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="25dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.323"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/highlight_05_1_" />
 
@@ -99,7 +97,7 @@
         android:id="@+id/textView6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="212dp"
+        android:layout_marginTop="188dp"
         android:text="Категории"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -111,25 +109,25 @@
         android:id="@+id/textView7"
         android:layout_width="45dp"
         android:layout_height="25dp"
-        android:layout_marginBottom="232dp"
+        android:layout_marginBottom="176dp"
         android:text="Все"
         android:textColor="#48B2E7"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.901"
+        app:layout_constraintHorizontal_bias="0.945"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/button2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="256dp"
+        android:layout_marginTop="236dp"
         android:backgroundTint="#FDFDFD"
         android:text="Все"
         android:textColor="#020202"
         app:cornerRadius="8dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.08"
+        app:layout_constraintHorizontal_bias="0.071"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -137,13 +135,13 @@
         android:id="@+id/outdoor_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="256dp"
+        android:layout_marginTop="236dp"
         android:backgroundTint="#FDFDFD"
         android:text="Outdoor"
         android:textColor="#040404"
         app:cornerRadius="8dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.451"
+        app:layout_constraintHorizontal_bias="0.453"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -151,7 +149,7 @@
         android:id="@+id/button4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="256dp"
+        android:layout_marginTop="236dp"
         android:backgroundTint="#FDFDFD"
         android:text="Tennis"
         android:textColor="#020202"
@@ -172,7 +170,7 @@
         app:layout_constraintHorizontal_bias="0.071"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.471" />
+        app:layout_constraintVertical_bias="0.4" />
 
     <TextView
         android:id="@+id/textView9"
@@ -185,7 +183,7 @@
         app:layout_constraintHorizontal_bias="0.899"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.47" />
+        app:layout_constraintVertical_bias="0.404" />
 
     <TextView
         android:id="@+id/textView10"
@@ -195,10 +193,10 @@
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.045"
+        app:layout_constraintHorizontal_bias="0.073"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.677" />
+        app:layout_constraintVertical_bias="0.77" />
 
     <ImageView
         android:id="@+id/imageView8"
@@ -218,7 +216,7 @@
         android:id="@+id/imageButton5"
         android:layout_width="97dp"
         android:layout_height="80dp"
-        android:layout_marginTop="648dp"
+        android:layout_marginTop="676dp"
         android:backgroundTint="#FFFFFF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -240,7 +238,7 @@
         tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
     <ImageButton
-        android:id="@+id/btnsaved"
+        android:id="@+id/imageButton7"
         android:layout_width="55dp"
         android:layout_height="51dp"
         android:layout_marginBottom="16dp"
@@ -278,6 +276,7 @@
         app:srcCompat="@drawable/frame"
         tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
+
     <ImageButton
         android:id="@+id/imageButton11"
         android:layout_width="307dp"
@@ -286,35 +285,29 @@
         android:layout_marginBottom="22dp"
         app:layout_constraintBottom_toTopOf="@+id/imageButton5"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.365"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView7"
-        app:layout_constraintVertical_bias="0.046"
+        app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/frame_1000000849"
         tools:ignore="SpeakableTextPresentCheck" />
 
-    <ImageView
-        android:id="@+id/imageView5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.208"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.593"
-        app:srcCompat="@drawable/nike_zoom_winflo_3_831561_001_mens_running_shoes_11550187236tiyyje6l87_prev_ui_3" />
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvProducts"
+        android:layout_width="374dp"
+        android:layout_height="235dp"
+        android:clipToPadding="false"
+        android:paddingStart="16dp"
+        android:paddingTop="8dp"
+        android:paddingEnd="16dp"
+        android:paddingBottom="8dp"
 
-    <ImageView
-        android:id="@+id/imageView13"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/textView10"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.815"
+        app:layout_constraintHorizontal_bias="0.32"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.593"
-        app:srcCompat="@drawable/nike_zoom_winflo_3_831561_001_mens_running_shoes_11550187236tiyyje6l87_prev_ui_3" />
+
+        app:layout_constraintTop_toBottomOf="@+id/textView8"
+        app:layout_constraintVertical_bias="0.184"
+        tools:listitem="@layout/product_card" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

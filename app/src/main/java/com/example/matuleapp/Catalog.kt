@@ -8,29 +8,28 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 
 class Catalog : AppCompatActivity() {
+
     private lateinit var savedIb: ImageButton
     private var isSaved = false
-    private val PRODUCT_ID = 1
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.catalog)
-        savedIb = findViewById(R.id.ibSaved)
-        savedIb.setOnClickListener{
-            if(!isSaved){
-                savedIb.setImageResource(R.drawable.icon3)
-                isSaved = true
 
-        }else{
-                savedIb.setImageResource(R.drawable.icon)
-                isSaved = false
+        savedIb = findViewById(R.id.ibSaved)
+
+        savedIb.setOnClickListener {
+            isSaved = !isSaved
+            savedIb.setImageResource(
+                if (isSaved) R.drawable.icon3 else R.drawable.icon
+            )
         }
-        }
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+            val bars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            v.setPadding(bars.left, bars.top, bars.right, bars.bottom)
             insets
         }
     }
-
 }
