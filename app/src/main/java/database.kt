@@ -1,6 +1,7 @@
 package com.example.matuleapp.Data
 import io.github.jan.supabase.postgrest.Postgrest
 import io.github.jan.supabase.createSupabaseClient
+import io.github.jan.supabase.storage.Storage
 
 object SupabaseProvider {
     val supabase = createSupabaseClient(
@@ -8,6 +9,7 @@ object SupabaseProvider {
         supabaseKey = "sb_publishable_71n_erzX2rwouMOsUQD5bg_VJdoQOR5"
     ) {
         install(Postgrest)
+        install(Storage)
     }
 }
 

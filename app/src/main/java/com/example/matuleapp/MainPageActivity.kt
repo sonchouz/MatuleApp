@@ -1,17 +1,16 @@
 package com.example.matuleapp
 
 import android.content.Intent
+import android.graphics.Rect
 import android.os.Bundle
 import android.util.TypedValue
 import android.view.View
-import android.widget.Button
-import android.widget.ImageButton
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import android.graphics.Rect
+import com.example.matuleapp.Domain.FavoritesStore
 import com.example.matuleapp.Data.com.example.matuleapp.Domain.ProductsRepository
 import com.example.matuleapp.Presentation.ui.adapters.ProductsAdapter
 import com.example.matuleapp.databinding.ActivityMainPageBinding
@@ -32,19 +31,13 @@ class MainPageActivity : AppCompatActivity() {
         binding = ActivityMainPageBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        setupProductsGrid()
         setupButtons()
+        setupProductsGrid()
         loadProducts()
     }
 
     private fun setupButtons() {
-        val btnoutdoor = findViewById<Button>(R.id.outdoor_btn)
-        btnoutdoor.setOnClickListener {
-            startActivity(Intent(this, Catalog::class.java))
-        }
-
-        val btnsaved = findViewById<ImageButton>(R.id.btnsaved)
-        btnsaved.setOnClickListener {
+        binding.btnsave.setOnClickListener {
             startActivity(Intent(this, SavedActivity::class.java))
         }
     }
@@ -55,9 +48,12 @@ class MainPageActivity : AppCompatActivity() {
         binding.rvProducts.setHasFixedSize(true)
 
         val spacingPx = dpToPx(12f)
-        binding.rvProducts.addItemDecoration(
-            GridSpacingItemDecoration(spanCount = 2, spacing = spacingPx)
-        )
+        // чтобы не добавлялось по 100 раз при пересоздании activity
+        if (binding.rvProducts.itemDecorationCount == 0) {
+            binding.rvProducts.addItemDecoration(
+                GridSpacingItemDecoration(spanCount = 2, spacing = spacingPx)
+            )
+        }
     }
 
     private fun loadProducts() {
@@ -65,8 +61,15 @@ class MainPageActivity : AppCompatActivity() {
         lifecycleScope.launch {
             try {
                 val products = repository.fetchProducts()
+
+                // проставить избранное из SharedPrefs
+                products.forEach { p ->
+                    p.isfavorite = FavoritesStore.isFavorite(this@MainPageActivity, p.id)
+                }
+
                 android.util.Log.d("PRODUCTS", "loaded = ${products.size}")
                 adapter.submit(products)
+
             } catch (e: Exception) {
                 android.util.Log.e("PRODUCTS", "error", e)
                 Toast.makeText(
@@ -104,8 +107,6 @@ class MainPageActivity : AppCompatActivity() {
 
             outRect.left = spacing - column * spacing / spanCount
             outRect.right = (column + 1) * spacing / spanCount
-
-            // чтобы не липло и выглядело ровно
             outRect.top = spacing
             outRect.bottom = spacing
         }

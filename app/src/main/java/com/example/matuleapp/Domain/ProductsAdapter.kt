@@ -12,8 +12,10 @@ import io.github.jan.supabase.storage.storage
 
 class ProductsAdapter(
     private val bucketName: String = "product-images",
-    private val onItemClick: ((ProductDto) -> Unit)? = null
+    private val onItemClick: ((ProductDto) -> Unit)? = null,
+    private val onFavoriteChanged: ((product: ProductDto, isFavorite: Boolean) -> Unit)? = null
 ) : RecyclerView.Adapter<ProductsAdapter.VH>() {
+
     private val items = mutableListOf<ProductDto>()
 
     fun submit(list: List<ProductDto>) {
@@ -32,6 +34,7 @@ class ProductsAdapter(
         )
         return VH(binding)
     }
+
     override fun onBindViewHolder(holder: VH, position: Int) {
         val item = items[position]
 
@@ -50,7 +53,31 @@ class ProductsAdapter(
                 .load(imageUrl)
                 .into(ivProduct)
 
+            // ----------- ИЗБРАННОЕ: отрисовка состояния -----------
+            renderFavorite(item.isfavorite)
+
+            // ----------- ИЗБРАННОЕ: клик -----------
+            btnsaved.setOnClickListener {
+                var newState = !item.isfavorite
+                item.isfavorite = newState
+
+                renderFavorite(newState)
+
+                // Если надо сообщить Activity/VM, чтобы сохранить/удалить
+                onFavoriteChanged?.invoke(item, newState)
+            }
+
             root.setOnClickListener { onItemClick?.invoke(item) }
+        }
+    }
+
+    private fun ProductCardBinding.renderFavorite(isFav: Boolean) {
+        // Тут меняй на свои drawable
+        // Например: заполненное сердце vs пустое
+        if (isFav) {
+            btnsaved.setImageResource(com.example.matuleapp.R.drawable.icon3) // активное сердце
+        } else {
+            btnsaved.setImageResource(com.example.matuleapp.R.drawable.icon) // пустое/обычное
         }
     }
 
