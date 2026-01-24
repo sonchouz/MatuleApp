@@ -20,7 +20,6 @@ class SavedActivity : AppCompatActivity() {
     private val adapter = ProductsAdapter(
         bucketName = "product-images",
         onFavoriteChanged = { _, isFav ->
-            // если удалили из избранного прямо тут, обновим список
             if (!isFav) loadFavorites()
         }
     )
@@ -38,7 +37,7 @@ class SavedActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        // чтобы когда вернулась с MainPage, список обновился
+
         loadFavorites()
     }
 
