@@ -10,6 +10,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
 import com.example.matuleapp.Data.SupabaseProvider
+import com.example.matuleapp.Data.repository.AuthRepositoryImpl
 import com.example.matuleapp.databinding.ActivityLoginBinding
 import io.github.jan.supabase.postgrest.postgrest
 import kotlinx.coroutines.launch
@@ -25,7 +26,7 @@ data class UserRow(
 class LoginActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityLoginBinding
-
+    private val authRepo = AuthRepositoryImpl()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -56,14 +57,16 @@ class LoginActivity : AppCompatActivity() {
             val pswd = binding.pswdtxt.text.toString()
 
             lifecycleScope.launch {
-                val ok = userExists(email, pswd)
-                if (!ok) {
+                try {
+                    authRepo.signIn(email, pswd)
+                    startActivity(Intent(this@LoginActivity, MainPageActivity::class.java))
+                    finish()
+                } catch (e: Exception) {
                     Toast.makeText(
                         this@LoginActivity,
-                        "Неверный email или пароль",
-                        Toast.LENGTH_SHORT
+                        e.message ?: "Ошибка входа",
+                        Toast.LENGTH_LONG
                     ).show()
-                    return@launch
                 }
 
 
